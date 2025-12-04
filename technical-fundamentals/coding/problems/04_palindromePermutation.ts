@@ -1,4 +1,4 @@
-// 4. *Palindrome Permutation*: 
+// 4. *Palindrome Permutation*:
 
 // Given a string, write a function to check if it is a permutation of a palindrome.
 // A palindrome is a word or phrase that is the same forwards and backwards. A permutation is a rearrangement of letters.
@@ -9,6 +9,17 @@
 // Output True (permutations: "taco cat", "atco cta", etc.)
 // ```
 
-export default function palindromePermutation (str: string): boolean {
+export default function palindromePermutation(str: string): boolean {
+  str = str.toLowerCase().replace(/\s+/g, "");
 
+  let len = str.length;
+
+  for (let i = 0; i < len / 2; i++) {
+    if (str[i] !== str[len - 1 - i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
+

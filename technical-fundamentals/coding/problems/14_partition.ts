@@ -22,4 +22,22 @@ export type Node<T> = {
 export default function partition<T>(
   head: Node<T> | undefined,
   x: T,
-): Node<T> | undefined {}
+): Node<T> | undefined {
+  let leftP = new LinkedList<T>();
+  let rightP = new LinkedList<T>();
+
+  let p = head;
+  while (p !== undefined) {
+    if (p.value < x) {
+      leftP.push(p.value);
+    } else {
+      rightP.push(p.value);
+    }
+    p = p.next;
+  }
+
+  leftP = leftP.merge(rightP);
+  leftP.print();
+
+  return leftP.head;
+}

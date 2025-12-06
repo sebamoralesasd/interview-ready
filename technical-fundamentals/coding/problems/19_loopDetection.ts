@@ -22,6 +22,24 @@ export type Node<T> = {
   next?: Node<T>;
 };
 
-export default function detectLoop<T>(
+export default function loopDetection<T>(
   head: Node<T> | undefined,
-): Node<T> | null {}
+): Node<T> | null {
+  if (head === undefined) {
+    return null;
+  }
+  let list = new LinkedList<T>(head);
+  let nodes = new Set<Node<T>>();
+
+  let p = list.head;
+  while (p !== undefined) {
+    if (nodes.has(p)) {
+      return p;
+    } else {
+      nodes.add(p);
+    }
+    p = p.next;
+  }
+
+  return null;
+}

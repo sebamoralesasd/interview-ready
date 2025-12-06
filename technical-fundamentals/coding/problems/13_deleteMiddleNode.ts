@@ -10,6 +10,7 @@
 // Result: nothing is returned, but the new linked list looks like a->b->d->e->f Hints: #72
 // ```
 
+import { unchangedTextChangeRange } from "typescript";
 import { LinkedList } from "./10_LinkedList";
 
 export type Node<T> = {
@@ -20,4 +21,20 @@ export type Node<T> = {
 export default function deleteMiddleNode<T>(
   head: Node<T>,
   position: number,
-): Node<T> | undefined {}
+): Node<T> | undefined {
+  let list = new LinkedList<T>(head);
+
+  if (list.length() <= 2) {
+    return head;
+  }
+  let p = list.tail;
+  while (p.next !== undefined) {
+    if (position === 1) {
+      p.next = p.next.next;
+      return head;
+    }
+    position -= 1;
+    p = p.next;
+  }
+  return head;
+}
